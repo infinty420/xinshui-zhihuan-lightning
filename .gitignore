@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+uploads/
+.venv/
+venv/
+outputs/server.log
+
+# 开源底座（仅作开发参考，来源与许可见 NOTICE.md，不纳入本仓库）
+vendor/
+
+# 生成产物（报表 / 截图均可重新生成）
+outputs/
+
+# WorkBuddy 项目内部数据（非交付物，含会话/记忆，勿公开）
+.workbuddy/

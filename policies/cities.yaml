@@ -1,0 +1,265 @@
+# =============================================================================
+# 城市社保 / 公积金政策库
+# 数据来源：开源底座 ikiwihome/income-calc (MIT)，原始口径 verified_on 2026-08-29
+# 结构说明：
+#   years.<年>.periods 为半年度区间 [1-6 月, 7-12 月]，社保基数通常 7 月随社平工资调整
+#   每个 period 内 pension / medical / unemployment / housing 分别给出 [下限, 上限]
+#   provisional: true 表示该半年度官方口径尚未公布，沿用最近已公布标准（报表中会标注）
+# 扩展新城市：直接复制任一城市节点修改即可，无需改动任何代码
+# =============================================================================
+meta:
+  name: 城市社保公积金政策库
+  version: 2026.1
+  updated_on: "2026-10-08"
+  base_project: "ikiwihome/income-calc (MIT License)"
+  supported_years: [2023, 2024, 2025, 2026]
+
+cities:
+
+  shanghai:
+    name: 上海
+    province: 上海
+    rent_deduction: 1500
+    defaults:
+      pension: 8
+      medical: 2
+      medical_fixed: 0
+      unemployment: 0.5
+      housing: 7
+      supplemental_housing: 0
+    housing_rate: [5, 7]
+    supplemental_housing_rate: [0, 5]
+    years:
+      2023:
+        periods:
+          - { months: [1, 6],  pension: [6520, 34188], medical: [6520, 34188], unemployment: [6520, 34188], housing: [2590, 34188] }
+          - { months: [7, 12], pension: [7310, 36549], medical: [7310, 36549], unemployment: [7310, 36549], housing: [2590, 36549] }
+      2024:
+        periods:
+          - { months: [1, 6],  pension: [7310, 36549], medical: [7310, 36549], unemployment: [7310, 36549], housing: [2590, 36549] }
+          - { months: [7, 12], pension: [7384, 36921], medical: [7384, 36921], unemployment: [7384, 36921], housing: [2690, 36921] }
+      2025:
+        periods:
+          - { months: [1, 6],  pension: [7384, 36921], medical: [7384, 36921], unemployment: [7384, 36921], housing: [2690, 36921] }
+          - { months: [7, 12], pension: [7460, 37302], medical: [7460, 37302], unemployment: [7460, 37302], housing: [2690, 37302] }
+      2026:
+        periods:
+          - { months: [1, 6],  pension: [7460, 37302], medical: [7460, 37302], unemployment: [7460, 37302], housing: [2690, 37302] }
+          - { months: [7, 12], pension: [7546, 37731], medical: [7546, 37731], unemployment: [7546, 37731], housing: [2740, 37731] }
+
+  beijing:
+    name: 北京
+    province: 北京
+    rent_deduction: 1500
+    defaults:
+      pension: 8
+      medical: 2
+      medical_fixed: 3        # 大病统筹固定额 3 元/月
+      unemployment: 0.5
+      housing: 7
+      supplemental_housing: 0
+    housing_rate: [5, 12]
+    supplemental_housing_rate: [0, 12]
+    years:
+      2023:
+        periods:
+          - { months: [1, 6],  pension: [5869, 31884], medical: [5869, 31884], unemployment: [5869, 31884], housing: [2320, 31884] }
+          - { months: [7, 12], pension: [6326, 33891], medical: [6326, 33891], unemployment: [6326, 33891], housing: [2320, 33891] }
+      2024:
+        periods:
+          - { months: [1, 6],  pension: [6326, 33891], medical: [6326, 33891], unemployment: [6326, 33891], housing: [2420, 33891] }
+          - { months: [7, 12], pension: [6821, 35283], medical: [6821, 35283], unemployment: [6821, 35283], housing: [2420, 35283] }
+      2025:
+        periods:
+          - { months: [1, 6],  pension: [6821, 35283], medical: [6821, 35283], unemployment: [6821, 35283], housing: [2420, 35283] }
+          - { months: [7, 12], pension: [7162, 35811], medical: [7162, 35811], unemployment: [7162, 35811], housing: [2540, 35811] }
+      2026:
+        periods:
+          - { months: [1, 6],  pension: [7162, 35811], medical: [7162, 35811], unemployment: [7162, 35811], housing: [2540, 35811] }
+          - { months: [7, 12], pension: [7270, 36348], medical: [7270, 36348], unemployment: [7270, 36348], housing: [2540, 36348], provisional: true }
+
+  guangzhou:
+    name: 广州
+    province: 广东
+    rent_deduction: 1500
+    defaults:
+      pension: 8
+      medical: 2
+      medical_fixed: 0
+      unemployment: 0.2
+      housing: 5
+      supplemental_housing: 0
+    housing_rate: [5, 12]
+    supplemental_housing_rate: [0, 12]
+    years:
+      2023:
+        periods:
+          - { months: [1, 6],  pension: [4588, 24930], medical: [4588, 24930], unemployment: [4588, 24930], housing: [2300, 36072] }
+          - { months: [7, 12], pension: [5284, 26421], medical: [5284, 26421], unemployment: [5284, 26421], housing: [2300, 38082] }
+      2024:
+        periods:
+          - { months: [1, 6],  pension: [5284, 26421], medical: [5284, 26421], unemployment: [5284, 26421], housing: [2300, 38082] }
+          - { months: [7, 12], pension: [5500, 27501], medical: [5500, 27501], unemployment: [5500, 27501], housing: [2300, 39579] }
+      2025:
+        periods:
+          - { months: [1, 6],  pension: [5500, 27501], medical: [5500, 27501], unemployment: [5500, 27501], housing: [2500, 39579] }
+          - { months: [7, 12], pension: [5510, 27549], medical: [5510, 27549], unemployment: [5510, 27549], housing: [2500, 39828] }
+      2026:
+        periods:
+          - { months: [1, 6],  pension: [5510, 27549], medical: [5510, 27549], unemployment: [5510, 27549], housing: [2500, 39828] }
+          - { months: [7, 12], pension: [5510, 27549], medical: [5510, 27549], unemployment: [5510, 27549], housing: [2500, 39828], provisional: true }
+
+  shenzhen:
+    name: 深圳
+    province: 广东
+    rent_deduction: 1500
+    defaults:
+      pension: 8
+      medical: 2
+      medical_fixed: 0
+      unemployment: 0.3
+      housing: 5
+      supplemental_housing: 0
+    housing_rate: [5, 12]
+    supplemental_housing_rate: [0, 12]
+    years:
+      2023:
+        periods:
+          - { months: [1, 6],  pension: [2360, 24930], medical: [7778, 38892], unemployment: [2360, 38892], housing: [2360, 38892] }
+          - { months: [7, 12], pension: [2360, 26421], medical: [7778, 38892], unemployment: [2360, 41190], housing: [2360, 41190] }
+      2024:
+        periods:
+          - { months: [1, 6],  pension: [2360, 26421], medical: [7778, 38892], unemployment: [2360, 41190], housing: [2360, 41190] }
+          - { months: [7, 12], pension: [3523, 27501], medical: [6475, 32376], unemployment: [2360, 43659], housing: [2360, 43659] }
+      2025:
+        periods:
+          - { months: [1, 6],  pension: [3523, 27501], medical: [6475, 32376], unemployment: [2360, 43659], housing: [2360, 43659] }
+          - { months: [7, 12], pension: [4775, 27549], medical: [6733, 33666], unemployment: [2520, 44934], housing: [2520, 44934] }
+      2026:
+        periods:
+          - { months: [1, 6],  pension: [4775, 27549], medical: [6733, 33666], unemployment: [2520, 44934], housing: [2520, 44934] }
+          - { months: [7, 12], pension: [4775, 27549], medical: [6733, 33666], unemployment: [2520, 44934], housing: [2520, 44934], provisional: true }
+
+  hangzhou:
+    name: 杭州
+    province: 浙江
+    rent_deduction: 1500
+    defaults:
+      pension: 8
+      medical: 2
+      medical_fixed: 0
+      unemployment: 0.5
+      housing: 7
+      supplemental_housing: 0
+    housing_rate: [5, 12]
+    supplemental_housing_rate: [0, 12]
+    years:
+      2023:
+        periods:
+          - { months: [1, 6],  pension: [3957, 22311], medical: [3957, 22311], unemployment: [3957, 22311], housing: [2280, 36675] }
+          - { months: [7, 12], pension: [4462, 24060], medical: [4462, 24060], unemployment: [4462, 24060], housing: [2490, 38390] }
+      2024:
+        periods:
+          - { months: [1, 6],  pension: [4462, 24060], medical: [4462, 24060], unemployment: [4462, 24060], housing: [2490, 38390] }
+          - { months: [7, 12], pension: [4812, 24930], medical: [4812, 24930], unemployment: [4812, 24930], housing: [2490, 39530] }
+      2025:
+        periods:
+          - { months: [1, 6],  pension: [4812, 24930], medical: [4812, 24930], unemployment: [4812, 24930], housing: [2490, 39530] }
+          - { months: [7, 12], pension: [4986, 25299], medical: [4986, 25299], unemployment: [4986, 25299], housing: [2490, 40694] }
+      2026:
+        periods:
+          - { months: [1, 6],  pension: [4986, 25299], medical: [4986, 25299], unemployment: [4986, 25299], housing: [2490, 40694] }
+          - { months: [7, 12], pension: [4986, 25299], medical: [4986, 25299], unemployment: [4986, 25299], housing: [2490, 40694], provisional: true }
+
+  nanjing:
+    name: 南京
+    province: 江苏
+    rent_deduction: 1500
+    defaults:
+      pension: 8
+      medical: 2
+      medical_fixed: 0
+      unemployment: 0.5
+      housing: 8
+      supplemental_housing: 0
+    housing_rate: [5, 12]
+    supplemental_housing_rate: [0, 12]
+    years:
+      2023:
+        periods:
+          - { months: [1, 6],  pension: [4494, 24042], medical: [4494, 24042], unemployment: [4494, 24042], housing: [2280, 38700] }
+          - { months: [7, 12], pension: [4494, 24042], medical: [4494, 24042], unemployment: [4494, 24042], housing: [2280, 38700] }
+      2024:
+        periods:
+          - { months: [1, 6],  pension: [4879, 24396], medical: [4879, 24396], unemployment: [4879, 24396], housing: [2280, 38700] }
+          - { months: [7, 12], pension: [4879, 24396], medical: [4879, 24396], unemployment: [4879, 24396], housing: [2490, 39900] }
+      2025:
+        periods:
+          - { months: [1, 6],  pension: [4952, 24762], medical: [4952, 24762], unemployment: [4952, 24762], housing: [2490, 39900] }
+          - { months: [7, 12], pension: [4952, 24762], medical: [4952, 24762], unemployment: [4952, 24762], housing: [2490, 41400] }
+      2026:
+        periods:
+          - { months: [1, 6],  pension: [4952, 24762], medical: [4952, 24762], unemployment: [4952, 24762], housing: [2660, 41400] }
+          - { months: [7, 12], pension: [4952, 24762], medical: [4952, 24762], unemployment: [4952, 24762], housing: [2660, 42400], provisional: true }
+
+  hefei:
+    name: 合肥
+    province: 安徽
+    rent_deduction: 1500
+    defaults:
+      pension: 8
+      medical: 2
+      medical_fixed: 0
+      unemployment: 0.5
+      housing: 7
+      supplemental_housing: 0
+    housing_rate: [5, 12]
+    supplemental_housing_rate: [0, 12]
+    years:
+      2023:
+        periods:
+          - { months: [1, 6],  pension: [4019, 20094], medical: [4019, 20094], unemployment: [4019, 20094], housing: [2060, 28004] }
+          - { months: [7, 12], pension: [4019, 20094], medical: [4019, 20094], unemployment: [4019, 20094], housing: [2060, 28004] }
+      2024:
+        periods:
+          - { months: [1, 6],  pension: [4227, 21133], medical: [4227, 21133], unemployment: [4227, 21133], housing: [2060, 28004] }
+          - { months: [7, 12], pension: [4227, 21133], medical: [4227, 21133], unemployment: [4227, 21133], housing: [2060, 28004] }
+      2025:
+        periods:
+          - { months: [1, 6],  pension: [4311, 21556], medical: [4311, 21556], unemployment: [4311, 21556], housing: [2060, 28004] }
+          - { months: [7, 12], pension: [4311, 21556], medical: [4311, 21556], unemployment: [4311, 21556], housing: [2320, 29782] }
+      2026:
+        periods:
+          - { months: [1, 6],  pension: [4311, 21556], medical: [4311, 21556], unemployment: [4311, 21556], housing: [2320, 29782] }
+          - { months: [7, 12], pension: [4311, 21556], medical: [4311, 21556], unemployment: [4311, 21556], housing: [2320, 29782], provisional: true }
+
+  wuhu:
+    name: 芜湖
+    province: 安徽
+    rent_deduction: 1100
+    defaults:
+      pension: 8
+      medical: 2
+      medical_fixed: 0
+      unemployment: 0.5
+      housing: 7
+      supplemental_housing: 0
+    housing_rate: [5, 12]
+    supplemental_housing_rate: [0, 12]
+    years:
+      2023:
+        periods:
+          - { months: [1, 6],  pension: [4019, 20094], medical: [4019, 20094], unemployment: [4019, 20094], housing: [1930, 23460] }
+          - { months: [7, 12], pension: [4019, 20094], medical: [4019, 20094], unemployment: [4019, 20094], housing: [1930, 23460] }
+      2024:
+        periods:
+          - { months: [1, 6],  pension: [4227, 21133], medical: [4227, 21133], unemployment: [4227, 21133], housing: [1930, 25386] }
+          - { months: [7, 12], pension: [4227, 21133], medical: [4227, 21133], unemployment: [4227, 21133], housing: [1930, 25386] }
+      2025:
+        periods:
+          - { months: [1, 6],  pension: [4311, 21556], medical: [4311, 21556], unemployment: [4311, 21556], housing: [1930, 25386] }
+          - { months: [7, 12], pension: [4311, 21556], medical: [4311, 21556], unemployment: [4311, 21556], housing: [2170, 25992] }
+      2026:
+        periods:
+          - { months: [1, 6],  pension: [4311, 21556], medical: [4311, 21556], unemployment: [4311, 21556], housing: [2170, 25992] }
+          - { months: [7, 12], pension: [4311, 21556], medical: [4311, 21556], unemployment: [4311, 21556], housing: [2170, 25992], provisional: true }
